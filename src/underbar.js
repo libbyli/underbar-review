@@ -186,6 +186,18 @@
           accumulator = iterator(accumulator, collection[i]);
         }
       }
+    } else {
+      if (accumulator !== undefined) {
+        for (var key in collection) {
+          accumulator = iterator(accumulator, collection[key]);
+        }
+      } else {
+        accumulator = collection[collection.keys[0]]
+        delete collection[collection.keys[0]]; 
+        for (var key in collection) {
+          accumulator = iterator(accumulator, collection[key]);
+        }
+      }
     }
     return accumulator;
   };
