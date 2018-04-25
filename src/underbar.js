@@ -192,7 +192,7 @@
           accumulator = iterator(accumulator, collection[key]);
         }
       } else {
-        accumulator = collection[collection.keys[0]]
+        accumulator = collection[collection.keys[0]];
         delete collection[collection.keys[0]]; 
         for (var key in collection) {
           accumulator = iterator(accumulator, collection[key]);
@@ -218,12 +218,28 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    iterator = iterator || _.identity;
+    return _.reduce(collection, function(allTrue, element) {
+      if (iterator(element)) {
+        return allTrue; 
+      } else {
+        return false;
+      } 
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    iterator = iterator || _.identity;
+    return _.reduce(collection, function(oneTrue, element) {
+      if (iterator(element)) {
+        return true; 
+      } else {
+        return oneTrue;
+      } 
+    }, false);
   };
 
 
